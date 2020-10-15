@@ -30,7 +30,7 @@ const puppeteer = require('puppeteer');
 	await frame.waitFor(5000);
 	await frame.type('#username', 'us@issss.io');
 	await frame.waitFor(5000);
-    await frame.type('#password', 'utctf{git_commit}');
+    await frame.type('#password', 'REDACTED');
 	await frame.waitFor(1000);
 	await frame.click('#login-btn-signin');
 	console.log('wait for login');
@@ -80,10 +80,16 @@ const puppeteer = require('puppeteer');
 
         temparray = result[0].slice(i,i+chunk);
         if (temparray[1][0] == "2020-09-23" && temparray[11][0] == "10:07") {
-            console.log(temparray[51][1])
+            uploadLink = temparray[51][1];
             break
         }
     }
+
+    await page.goto(uploadlink);
+
+    const link = await page.$eval("input[type=file]");
+
+   console.log(link);
     // close the browser
    // await browser.close();
 })();
